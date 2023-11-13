@@ -1,0 +1,29 @@
+{
+    "name": "exploitfate/engine-delivery",
+    "description": "Delivery visitor via consumer queue",
+    "version": "1.1.11",
+    "type": "project",
+    "require": {
+        "php-amqplib/php-amqplib": "^2.7",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "exploitfate",
+            "email": "exploitfate@yahoo.com",
+            "role": "Developer"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "delivery\\": "src/"
+        }
+    }
+}

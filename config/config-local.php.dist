@@ -1,0 +1,19 @@
+<?php
+
+return [
+    'request' => [
+        'schema' => 'http',
+        'host' => 'hostname.com',
+        'path' => '/route/',
+    ],
+    'logger' => [
+        'levels' => [
+            'error',
+            'warning',
+        ],
+    ],
+    'queue' => [
+        'host' => 'localhost',
+        'port' => 5672,
+    ],
+];
