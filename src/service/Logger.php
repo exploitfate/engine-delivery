@@ -273,7 +273,7 @@ class Logger
     public static function filterMessages($messages, $levels = 0, $categories = [])
     {
         foreach ($messages as $i => $message) {
-            if ($levels && !($levels & $message[1])) {
+            if (is_numeric($levels) && is_numeric($message[1]) && !($levels & $message[1])) {
                 unset($messages[$i]);
                 continue;
             }
