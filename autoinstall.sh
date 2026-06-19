@@ -230,7 +230,7 @@ echo '[program:failover-engine-delivery]
 ' | sudo tee /etc/supervisor/conf.d/failover-engine-delivery.conf
 
 echo '[eventlistener:superslacker]
-command=superslacker --webhook="'$SUPERSLACKER_WEBHOOK_URL'" --channel="'$SUPERSLACKER_WEBHOOK_CHANNEL'" --hostname="'$SUPERSLACKER_WEBHOOK_DOMAIN'"
+command=superslacker --webhook="'$SUPERSLACKER_WEBHOOK_URL'" --channel="'$SUPERSLACKER_WEBHOOK_CHANNEL'" --hostname="'$SUPERSLACKER_WEBHOOK_DOMAIN'" --blacklist="vartovyi"
 events=PROCESS_STATE,TICK_60
 ' | sudo tee /etc/supervisor/conf.d/superslacker.conf
 
