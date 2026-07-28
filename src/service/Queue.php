@@ -215,4 +215,19 @@ class Queue
             $channel->wait();
         }
     }
+
+    public function disconnect()
+    {
+        try {
+            if (!empty($this->channel)) {
+                $this->channel->close();
+            }
+            if (!empty($this->connection)) {
+                $this->connection->close();
+            }
+        } catch (\Throwable $e) {
+        }
+        $this->channel = null;
+        $this->connection = null;
+    }
 }

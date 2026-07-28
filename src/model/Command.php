@@ -40,7 +40,28 @@ class Command
 
     public function execute()
     {
-        $this->getApplication()->getQueue()->consume('engine', [$this, 'delivery']);
+        $base = 1;
+        $max = 30;
+        $attempt = 0;
+        while (true) {
+            $startedAt = time();
+            try {
+                $this->getApplication()->getQueue()->consume('engine', [$this, 'delivery']);
+            } catch (\Throwable $e) {
+                if (time() - $startedAt > $max) {
+                    $attempt = 0;
+                }
+                $delay = min($max, $base * (1 << $attempt));
+                $sleep = mt_rand((int) ($delay / 2), $delay);
+                $this->getApplication()->getLogger()->log(
+                    'Queue connection lost: ' . $e->getMessage() . ' - reconnecting in ' . $sleep . 's',
+                    Logger::LEVEL_ERROR
+                );
+                $this->getApplication()->getQueue()->disconnect();
+                sleep(max(1, $sleep));
+                $attempt = min($attempt + 1, 6);
+            }
+        }
     }
 
     /**
