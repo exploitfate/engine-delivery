@@ -124,3 +124,19 @@ sudo supervisorctl restart all
 ## License
 
 The MIT License (MIT). See [LICENSE](LICENSE) file.
+
+## Patched Docker runtime
+
+The container uses `inernetbs/php74-cli:latest`, including the PHP security-team
+backport for CVE-2026-109618/CVE-2026-109619 and disabled upload progress.
+Configure `config/config-local.php`, then run:
+
+```sh
+docker compose pull
+docker compose run --rm delivery composer install --no-dev
+docker compose up -d
+```
+
+Host networking keeps access to the RabbitMQ server installed on the Linux host.
+The native installer uses the host's PHP; update that interpreter separately
+when using native deployment instead of the container.
