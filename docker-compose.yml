@@ -1,9 +1,0 @@
-services:
-  delivery:
-    image: inernetbs/php74-cli
-    working_dir: /app
-    volumes:
-      - .:/app
-    network_mode: host
-    command: ["php", "delivery"]
-    restart: unless-stopped
